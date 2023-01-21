@@ -4,6 +4,7 @@ local options = {
   completeopt = { "menuone", "noselect" }, -- mostly just for cmp
   conceallevel = 0,                        -- so that `` is visible in markdown files
   fileencoding = "utf-8",                  -- the encoding written to a file
+  hlsearch = false,
   ignorecase = true,                       -- ignore case in search patterns
   laststatus = 3,
   mouse = "a",                             -- allow the mouse to be used in neovim
@@ -30,6 +31,8 @@ local options = {
   sidescrolloff = 8,                       -- minimal number of screen columns either side of cursor if wrap is `false`
   whichwrap = "<,>,[,],h,l",
 }
+
+vim.wo.fillchars='eob: '
 
 for k, v in pairs(options) do
   vim.opt[k] = v

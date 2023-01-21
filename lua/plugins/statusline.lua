@@ -1,3 +1,17 @@
+local function getWords()
+  if vim.bo.filetype == "text" or vim.bo.filetype == "markdown" then
+    if vim.fn.wordcount().visual_words == 1 then
+      return tostring(vim.fn.wordcount().visual_words) .. " word"
+    elseif not (vim.fn.wordcount().visual_words == nil) then
+      return tostring(vim.fn.wordcount().visual_words) .. " words"
+    else
+      return tostring(vim.fn.wordcount().words) .. " words"
+    end
+  else
+    return ""
+  end
+end
+
 require('lualine').setup {
   options = {
     theme = pywal,
@@ -8,8 +22,8 @@ require('lualine').setup {
     lualine_a = { 'mode' },
     lualine_b = { 'filename', 'branch' },
     lualine_c = {},
-    lualine_x = { 'filetype' },
-    lualine_y = { '%{wordcount().words} words' },
+    lualine_x = {},
+    lualine_y = { 'filetype', getWords },
     lualine_z = { 'progress' },
   },
   inactive_sections = {

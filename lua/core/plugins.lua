@@ -16,6 +16,7 @@ vim.opt.runtimepath:prepend(lazypath)
 require("lazy").setup({
   -- Essentials
   "nvim-lua/plenary.nvim",
+
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -33,13 +34,16 @@ require("lazy").setup({
       require('plugins.telescope')
     end
   },
+
   {
     "nvim-telescope/telescope-fzf-native.nvim",
     build = "make",
   },
+
   'debugloop/telescope-undo.nvim',
   'jvgrootveld/telescope-zoxide',
-  
+  "nvim-telescope/telescope-file-browser.nvim",
+
   -- LSP 
   {
     'VonHeikemen/lsp-zero.nvim',
@@ -74,13 +78,38 @@ require("lazy").setup({
       require("plugins.mini")
     end
   },
-  'aserowy/tmux.nvim',
-  "ahmedkhalf/project.nvim",
-  "folke/which-key.nvim",
-  "kyazdani42/nvim-web-devicons",
-  "nvim-tree/nvim-tree.lua",
-  "akinsho/toggleterm.nvim",
-  "lukas-reineke/indent-blankline.nvim",
+
+  'lambdalisue/suda.vim',
+
+  {
+    "ahmedkhalf/project.nvim",
+    config = function ()
+      require("project_nvim").setup {}
+    end
+  },
+  {
+    "folke/which-key.nvim",
+    config = function ()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("plugins.whichkey")
+    end
+  },
+
+  {
+    'toppair/peek.nvim',
+    build = 'deno task --quiet build:fast',
+    config = function ()
+      require('plugins.peek')
+    end
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require('plugins.indent')
+    end
+  },
 
   -- Customisation
   {
@@ -95,6 +124,14 @@ require("lazy").setup({
       require('plugins.todo')
     end
   },
+
+  {
+    'kdheepak/tabline.nvim',
+    config = function()
+      require('plugins.tabline')
+    end
+  },
+
   {
     "nvim-lualine/lualine.nvim",
     config = function ()
