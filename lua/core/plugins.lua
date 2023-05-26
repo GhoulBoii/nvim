@@ -30,21 +30,16 @@ require("lazy").setup({
   -- TODO: Configure Telescope
   {
     "nvim-telescope/telescope.nvim",
+    dependencies = {
+      'debugloop/telescope-undo.nvim',
+      'jvgrootveld/telescope-zoxide',
+    },
     config = function ()
       require('plugins.telescope')
     end
   },
 
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    build = "make",
-  },
-
-  'debugloop/telescope-undo.nvim',
-  'jvgrootveld/telescope-zoxide',
-  "nvim-telescope/telescope-file-browser.nvim",
-
-  -- LSP 
+  -- LSP
   {
     'VonHeikemen/lsp-zero.nvim',
     dependencies = {
@@ -82,9 +77,22 @@ require("lazy").setup({
   'lambdalisue/suda.vim',
 
   {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
+    end
+  },
+
+  {
     "ahmedkhalf/project.nvim",
     config = function ()
       require("project_nvim").setup {}
+    end
+  },
+  {
+    'dinhhuy258/sfm.nvim',
+    config = function()
+      require("plugins.sfm")
     end
   },
   {

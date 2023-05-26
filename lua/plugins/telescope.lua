@@ -30,6 +30,7 @@ require('telescope').setup{
     entry_prefix = "  ",
     initial_mode = "insert",
     selection_strategy = "reset",
+    generic_sorter = require('mini.fuzzy').get_telescope_sorter,
     sorting_strategy = "ascending",
     layout_strategy = "horizontal",
     layout_config = {
@@ -50,25 +51,6 @@ require('telescope').setup{
     -- builtin picker
   },
   extensions = {
-    file_browser = {
-      theme = "ivy",
-      -- disables netrw and use telescope-file-browser in its place
-      hijack_netrw = true,
-      mappings = {
-        ["i"] = {
-          -- your custom insert mode mappings
-        },
-        ["n"] = {
-          -- your custom normal mode mappings
-        },
-      },
-    },
-    fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = true,  -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-    },
     undo = {
       use_delta = true,     -- this is the default
       side_by_side = false, -- this is the default
@@ -78,7 +60,6 @@ require('telescope').setup{
           -- you want to use the following actions. This means installing as a dependency of
           -- telescope in it's `requirements` and loading this extension from there instead of
           -- having the separate plugin definition as outlined above. See issue #6.
-          ["<cr>"] = require("telescope-undo.actions").yank_additions,
           ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
           ["<C-cr>"] = require("telescope-undo.actions").restore,
         },
@@ -105,8 +86,6 @@ require('telescope').setup{
   },
 }
 
-require('telescope').load_extension('fzf')
-require('telescope').load_extension('file_browser')
 require("telescope").load_extension("undo")
 require("telescope").load_extension("zoxide")
 require('telescope').load_extension('projects')
