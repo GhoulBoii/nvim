@@ -27,7 +27,6 @@ keymap("n", "<S-k>", ":bnext<CR>", opts)
 keymap("n", "<S-j>", ":bprevious<CR>", opts)
 
 keymap("n", "<leader>u", "<cmd>Telescope undo<cr>", opts)
-keymap("n", "<leader>e", "<cmd>SFMToggle<cr>", opts)
 
 -- Visual --
 -- Stay in indent mode
