@@ -1,13 +1,7 @@
 return {
-  "nvim-lua/plenary.nvim",
-
   {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    event = "BufReadPre",
-    -- config = function ()
-    --   require('plugins.treesitter')
-    -- end
+    "nvim-lua/plenary.nvim",
+    lazy = true
   },
 
   -- Telescope
@@ -25,21 +19,7 @@ return {
 
   -- Extra
   -- TODO: Finish configuration for extra plugins
-  {
-    'echasnovski/mini.nvim',
-    -- config = function ()
-    --   require("plugins.mini")
-    -- end
-  },
-
   'lambdalisue/suda.vim',
-
-  {
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup()
-    end
-  },
 
   {
     "ahmedkhalf/project.nvim",
@@ -47,6 +27,7 @@ return {
       require("project_nvim").setup {}
     end
   },
+
   {
     "folke/which-key.nvim",
     config = function ()
@@ -76,12 +57,6 @@ return {
     "lewis6991/gitsigns.nvim",
     config = function()
       -- require('gitsigns').setup()
-    end
-  },
-  {
-    "folke/todo-comments.nvim",
-    config = function()
-      -- require('plugins.todo')
     end
   },
 }
