@@ -31,7 +31,7 @@ return {
       history = true,
       delete_check_events = "TextChanged",
     },
-    -- stylua: ignore
+
     keys = {
       {
         "<tab>",
