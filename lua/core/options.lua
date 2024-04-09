@@ -8,6 +8,7 @@ local options = {
   laststatus = 3,
   mouse = "a",                             -- allow the mouse to be used in neovim
   pumheight = 10,                          -- pop up menu height
+  relativenumber = true,
   showmode = false,                        -- we don't need to see things like -- INSERT -- anymore
   signcolumn = "yes",
   smartcase = true,                        -- smart case
@@ -31,21 +32,23 @@ local options = {
   whichwrap = "<,>,[,]",
 }
 
-vim.wo.fillchars='eob: '
+vim.wo.fillchars = 'eob: '
 
 if vim.fn.has('wsl') == 1 then
-    vim.g.clipboard = {
-        name = 'WslClipboard',
-        copy = {
-            ['+'] = '/mnt/c/Windows/System32/clip.exe',
-            ['*'] = '/mnt/c/Windows/System32/clip.exe',
-        },
-        paste = {
-            ['+'] = '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-            ['*'] = '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-        },
-        cache_enabled = 0,
-    }
+  vim.g.clipboard = {
+    name = 'WslClipboard',
+    copy = {
+      ['+'] = '/mnt/c/Windows/System32/clip.exe',
+      ['*'] = '/mnt/c/Windows/System32/clip.exe',
+    },
+    paste = {
+      ['+'] =
+      '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ['*'] =
+      '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+  }
 end
 
 for k, v in pairs(options) do
