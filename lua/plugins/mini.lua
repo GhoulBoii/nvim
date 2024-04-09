@@ -78,24 +78,6 @@ return {
   },
 
   {
-    'echasnovski/mini.diff',
-    opts = {
-      view = {
-        -- Visualization style. Possible values are 'sign' and 'number'.
-        -- Default: 'number' if line numbers are enabled, 'sign' otherwise.
-        -- style = 'number',
-
-        -- Signs used for hunks with 'sign' view
-        style = 'sign',
-        signs = { add = '+', change = '~', delete = '-' },
-
-        -- Priority of used visualization extmarks
-        priority = vim.highlight.priorities.user - 1,
-      },
-    }
-  },
-
-  {
     'echasnovski/mini.files',
     opts = {
       windows = {
