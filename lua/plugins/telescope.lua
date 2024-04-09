@@ -4,16 +4,9 @@ return {
   tag = '0.1.6',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = vim.fn.executable("make") == 1 and "make"
-          or
-          "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-      enabled = vim.fn.executable("make") == 1 or vim.fn.executable("cmake") == 1,
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
-    },
+    "nvim-telescope/telescope-fzy-native.nvim",
+    'debugloop/telescope-undo.nvim',
+    'jvgrootveld/telescope-zoxide',
   },
   keys = {
     {
@@ -41,6 +34,9 @@ return {
     { "<leader>sm", "<cmd>Telescope marks<cr>",                     desc = "Jump to Mark" },
     { "<leader>so", "<cmd>Telescope vim_options<cr>",               desc = "Options" },
     { "<leader>sR", "<cmd>Telescope resume<cr>",                    desc = "Resume" },
+    { "<leader>st", "<cmd>Telescope<cr>",                           desc = "Main Window" },
+    { "<leader>su", "<cmd>Telescope undo<cr>",                      desc = "Undo" },
+    { "<leader>sz", "<cmd>Telescope zoxide list<cr>",               desc = "Zoxide" },
   },
   config = function()
     local z_utils = require("telescope._extensions.zoxide.utils")
@@ -69,7 +65,6 @@ return {
         entry_prefix = "  ",
         initial_mode = "insert",
         selection_strategy = "reset",
-        generic_sorter = require('mini.fuzzy').get_telescope_sorter,
         sorting_strategy = "ascending",
         layout_strategy = "horizontal",
         layout_config = {
@@ -96,25 +91,21 @@ return {
           },
         },
         zoxide = {
-          prompt_title = "[ Walking on the shoulders of TJ ]",
           mappings = {
             default = {
               after_action = function(selection)
                 print("Update to (" .. selection.z_score .. ") " .. selection.path)
               end
             },
-            ["<C-s>"] = {
-              before_action = function(selection) print("before C-s") end,
-              action = function(selection)
-                vim.cmd("edit " .. selection.path)
-              end
-            },
-            -- Opens the selected entry in a new split
-            ["<C-q>"] = { action = z_utils.create_basic_command("split") },
           },
         },
+
+        fzy_native = {
+          override_generic_sorter = true,
+        }
       },
     }
+    require("telescope").load_extension("fzy_native")
     require("telescope").load_extension("undo")
     require("telescope").load_extension("zoxide")
   end,
