@@ -85,7 +85,29 @@ return {
     end
   },
 
+  {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    dependencies = {
+      { "williamboman/mason.nvim" },
+      { "williamboman/mason-lspconfig.nvim" },
+    },
+    opts = {
+      ensure_installed = {
+        "clangd",
+        "jdtls",
+        "lua_ls",
+        "pyright",    -- LSP for python
+        "ruff-lsp",   -- linter for python (includes flake8, pep8, etc.)
+        "debugpy",    -- debugger
+        "black",      -- formatter
+        "isort",      -- organize imports
+        "taplo",      -- LSP for toml (for pyproject.toml files)
+      },
+    },
+  },
   -- LSP
+
+
   {
     'neovim/nvim-lspconfig',
     cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
@@ -112,11 +134,6 @@ return {
       })
 
       require('mason-lspconfig').setup({
-        ensure_installed = {
-          "clangd",
-          "jdtls",
-          "lua_ls",
-        },
         handlers = {
           lsp_zero.default_setup,
           lua_ls = function()
