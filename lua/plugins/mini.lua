@@ -1,5 +1,10 @@
 return {
   {
+    "echasnovski/mini.ai",
+    config = true
+  },
+
+  {
     "echasnovski/mini.clue",
     config = function()
       local miniclue = require('mini.clue')
@@ -161,5 +166,10 @@ return {
   {
     'echasnovski/mini.sessions',
     config = true
-  }
+  },
+
+  -- {
+  --   'echasnovski/mini.surround',
+  --   config = true
+  -- }
 }
