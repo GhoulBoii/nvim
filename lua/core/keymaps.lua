@@ -11,20 +11,20 @@ vim.g.maplocalleader = " "
 
 -- Normal --
 -- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+keymap("n", "<leader>wh", "<C-w>h", opts)
+keymap("n", "<leader>wj", "<C-w>j", opts)
+keymap("n", "<leader>wk", "<C-w>k", opts)
+keymap("n", "<leader>wl", "<C-w>l", opts)
 
 -- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<A-h>", ":resize -2<CR>", opts)
+keymap("n", "<A-l>", ":resize +2<CR>", opts)
+keymap("n", "<A-j>", ":vertical resize -2<CR>", opts)
+keymap("n", "<A-k>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-keymap("n", "<S-k>", ":bnext<CR>", opts)
-keymap("n", "<S-j>", ":bprevious<CR>", opts)
+keymap("n", "<leader><S-l>", ":bnext<CR>", opts)
+keymap("n", "<leader><S-h>", ":bprevious<CR>", opts)
 
 -- Visual --
 -- Stay in indent mode
@@ -39,3 +39,12 @@ keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+
+-- Don't yank on delete char
+keymap("n", "x", '"_x', opts)
+keymap("n", "X", '"_X', opts)
+keymap("v", "x", '"_x', opts)
+keymap("v", "X", '"_X', opts)
+
+keymap("n", "<C-d>", "<C-d>zz", opts)
+keymap("n", "<C-d>", "<C-d>zz", opts)
