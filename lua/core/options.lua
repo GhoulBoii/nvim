@@ -16,9 +16,9 @@ local options = {
   splitbelow = true,                       -- force all horizontal splits to go below current window
   splitright = true,                       -- force all vertical splits to go to the right of current window
   swapfile = false,                        -- creates a swapfile
-  timeoutlen = 300,                        -- time to wait for a mapped sequence to complete (in milliseconds)
+  timeoutlen = 200,                        -- time to wait for a mapped sequence to complete (in milliseconds)
   undofile = true,                         -- enable persistent undo
-  updatetime = 300,                        -- faster completion (4000ms default)
+  updatetime = 100,                        -- faster completion (4000ms default)
   writebackup = false,                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
   expandtab = true,                        -- convert tabs to spaces
   shiftwidth = 2,                          -- the number of spaces inserted for each indentation
@@ -34,22 +34,22 @@ local options = {
 
 vim.wo.fillchars = 'eob: '
 
-if vim.fn.has('wsl') == 1 then
-  vim.g.clipboard = {
-    name = 'WslClipboard',
-    copy = {
-      ['+'] = '/mnt/c/Windows/System32/clip.exe',
-      ['*'] = '/mnt/c/Windows/System32/clip.exe',
-    },
-    paste = {
-      ['+'] =
-      '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-      ['*'] =
-      '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    },
-    cache_enabled = 0,
-  }
-end
+-- if vim.fn.has('wsl') == 1 then
+--   vim.g.clipboard = {
+--     name = 'WslClipboard',
+--     copy = {
+--       ['+'] = '/mnt/c/Windows/System32/clip.exe',
+--       ['*'] = '/mnt/c/Windows/System32/clip.exe',
+--     },
+--     paste = {
+--       ['+'] =
+--       '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+--       ['*'] =
+--       '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+--     },
+--     cache_enabled = 0,
+--   }
+-- end
 
 for k, v in pairs(options) do
   vim.opt[k] = v
