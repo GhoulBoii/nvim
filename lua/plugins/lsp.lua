@@ -27,6 +27,7 @@ return {
         require("luasnip.loaders.from_vscode").lazy_load()
       end,
     },
+    event = "InsertEnter",
     opts = {
       history = true,
       delete_check_events = "TextChanged",
@@ -91,21 +92,21 @@ return {
       { "williamboman/mason.nvim" },
       { "williamboman/mason-lspconfig.nvim" },
     },
+    cmd = "Mason",
     opts = {
       ensure_installed = {
         "clangd",
         "jdtls",
         "lua_ls",
-        "pyright",    -- LSP for python
-        "ruff-lsp",   -- linter for python (includes flake8, pep8, etc.)
-        "debugpy",    -- debugger
-        "black",      -- formatter
-        "isort",      -- organize imports
-        "taplo",      -- LSP for toml (for pyproject.toml files)
+        "pyright",  -- LSP for python
+        "ruff-lsp", -- linter for python (includes flake8, pep8, etc.)
+        "debugpy",  -- debugger
+        "black",    -- formatter
+        "isort",    -- organize imports
+        "taplo",    -- LSP for toml (for pyproject.toml files)
       },
     },
   },
-  -- LSP
 
 
   {
