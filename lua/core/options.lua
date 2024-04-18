@@ -34,22 +34,22 @@ local options = {
 
 vim.wo.fillchars = 'eob: '
 
--- if vim.fn.has('wsl') == 1 then
---   vim.g.clipboard = {
---     name = 'WslClipboard',
---     copy = {
---       ['+'] = '/mnt/c/Windows/System32/clip.exe',
---       ['*'] = '/mnt/c/Windows/System32/clip.exe',
---     },
---     paste = {
---       ['+'] =
---       '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
---       ['*'] =
---       '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
---     },
---     cache_enabled = 0,
---   }
--- end
+if vim.fn.has('wsl') == 1 then
+  vim.g.clipboard = {
+    name = 'WslClipboard',
+    copy = {
+      ['+'] = '/mnt/c/Windows/System32/clip.exe',
+      ['*'] = '/mnt/c/Windows/System32/clip.exe',
+    },
+    paste = {
+      ['+'] =
+      '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ['*'] =
+      '/mnt/c/Windows/System32/WindowsPowershell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+  }
+end
 
 for k, v in pairs(options) do
   vim.opt[k] = v
