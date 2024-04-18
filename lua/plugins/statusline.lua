@@ -1,7 +1,7 @@
 return {
   {
     "nvim-lualine/lualine.nvim",
-    config = function ()
+    config = function()
       local function getWords()
         if vim.bo.buftype ~= "nofile" or vim.bo.filetype == "markdown" then
           if vim.fn.wordcount().visual_words == 1 then
