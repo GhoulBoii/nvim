@@ -14,11 +14,13 @@ vim.opt.runtimepath:prepend(lazypath)
 
 vim.api.nvim_set_keymap("n", "<leader>l", "<cmd>Lazy<cr>", { noremap = true, desc = "Lazy", silent = true })
 
--- Plugins
 require("lazy").setup("plugins", {
-  checker = { enabled = true },
   concurrency = 5,
   performance = {
+    cache = {
+      enabled = true,
+    },
+    reset_packpath = true,
     rtp = {
       disabled_plugins = {
         "gzip",
