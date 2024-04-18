@@ -1,6 +1,6 @@
 -- Creating Autocmd groups
 local function augroup(name)
-  return vim.api.nvim_create_augroup( name, { clear = true })
+  return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
 -- Wrap and SpellCheck in Markdown and gitcommit
@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
-    vim.highlight.on_yank({higroup = 'Visual', timeout = 200})
+    vim.highlight.on_yank({ higroup = 'Visual', timeout = 200 })
   end,
 })
 
@@ -102,3 +102,14 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
+
+-- remove trailing whitespaces and ^M chars
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = augroup("format"),
+  pattern = { "*" },
+  callback = function(_)
+    local save_cursor = vim.fn.getpos(".")
+    vim.cmd [[%s/\s\+$//e]]
+    vim.fn.setpos(".", save_cursor)
+  end,
+})
