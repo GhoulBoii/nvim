@@ -70,6 +70,7 @@ return {
           { name = 'buffer' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = "codeium" }
         },
         formatting = lsp_zero.cmp_format(),
         mapping = cmp.mapping.preset.insert({
