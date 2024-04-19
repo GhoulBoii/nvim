@@ -1,7 +1,9 @@
 return {
   {
     "echasnovski/mini.ai",
-    config = true
+    opts = {
+      search_method = 'cover_or_next',
+    },
   },
 
   {
@@ -168,8 +170,8 @@ return {
     config = true
   },
 
-  -- {
-  --   'echasnovski/mini.surround',
-  --   config = true
-  -- }
+  {
+    'echasnovski/mini.surround',
+    config = true
+  }
 }
