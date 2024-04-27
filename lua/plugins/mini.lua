@@ -85,6 +85,11 @@ return {
   },
 
   {
+    'echasnovski/mini.extra',
+    config = true,
+  },
+
+  {
     'echasnovski/mini.files',
     opts = {
       windows = {
@@ -130,14 +135,14 @@ return {
     'echasnovski/mini.hipatterns',
     config = function()
       local hipatterns = require('mini.hipatterns')
+      local hi_words = require('mini.extra').gen_highlighter.words
       hipatterns.setup({
         highlighters = {
           -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
-          fixme     = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
-          hack      = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
-          todo      = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
-          note      = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
-
+          fix = hi_words({ 'FIX', 'Fix', 'fix' }, 'MiniHipatternsFixme'),
+          todo = hi_words({ 'TODO', 'Todo', 'todo' }, 'MiniHipatternsTodo'),
+          hack = hi_words({ 'HACK', 'Hack', 'hack' }, 'MiniHipatternsHack'),
+          note = hi_words({ 'NOTE', 'Note', 'note' }, 'MiniHipatternsNote'),
           -- Highlight hex color strings (`#rrggbb`) using that color
           hex_color = hipatterns.gen_highlighter.hex_color(),
         },
@@ -151,7 +156,7 @@ return {
     opts = {},
     keys = {
       {
-        "<leader>tt",
+        "<leader>z",
         function()
           vim.g.minipairs_disable = not vim.g.minipairs_disable
           if vim.g.minipairs_disable then
