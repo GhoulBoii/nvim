@@ -113,3 +113,15 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.fn.setpos(".", save_cursor)
   end,
 })
+
+-- Create directories when needed, when saving a file (except for URIs "://").
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = augroup('auto_create_dir'),
+  callback = function(event)
+    if event.match:match('^%w%w+://') then
+      return
+    end
+    local file = vim.uv.fs_realpath(event.match) or event.match
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
+  end,
+})
