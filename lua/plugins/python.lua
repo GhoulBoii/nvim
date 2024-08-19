@@ -164,9 +164,13 @@ return {
       "nvim-telescope/telescope.nvim",
       "mfussenegger/nvim-dap-python",
     },
+    branch = "regexp", -- This is the regexp branch, use this for the new version
     ft = "python",
     opts = {
       dap_enabled = true, -- makes the debugger work with venv
+    },
+    keys = {
+      { "<leader>v", "<cmd>VenvSelect<cr>", desc = "Select venv" },
     },
   },
 }
