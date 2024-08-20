@@ -21,16 +21,6 @@ require("lazy").setup("plugins", {
       enabled = true,
     },
     reset_packpath = true,
-    rtp = {
-      disabled_plugins = {
-        "gzip",
-        "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
-      },
-    },
   },
   debug = false,
 })
