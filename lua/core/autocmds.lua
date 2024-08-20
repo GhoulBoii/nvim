@@ -125,3 +125,17 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
   end,
 })
+
+-- Don't auto comment new lines
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = augroup("auto_comment"),
+  pattern = '',
+  command = 'set fo-=c fo-=r fo-=o'
+})
+
+-- Set text filetype
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = augroup("text_filetype"),
+  pattern = "*.txt",
+  command = 'setfiletype text'
+})
