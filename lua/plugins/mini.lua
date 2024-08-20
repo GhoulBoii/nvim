@@ -1,3 +1,12 @@
+local header_art =
+[[
+ ▄▄ •  ▄ .▄      ▄• ▄▌▄▄▌   ▌ ▐·▪  • ▌ ▄ ·.
+▐█ ▀ ▪██▪▐█▪     █▪██▌██•  ▪█·█▌██ ·██ ▐███▪
+▄█ ▀█▄██▀▐█ ▄█▀▄ █▌▐█▌██▪  ▐█▐█•▐█·▐█ ▌▐▌▐█·
+▐█▄▪▐███▌▐▀▐█▌.▐▌▐█▄█▌▐█▌▐▌ ███ ▐█▌██ ██▌▐█▌
+·▀▀▀▀ ▀▀▀ · ▀█▄▀▪ ▀▀▀ .▀▀▀ . ▀  ▀▀▀▀▀  █▪▀▀▀
+]]
+
 return {
   {
     "echasnovski/mini.ai",
@@ -9,7 +18,7 @@ return {
   {
     "echasnovski/mini.clue",
     config = function()
-      local miniclue = require('mini.clue')
+      local miniclue = require("mini.clue")
       miniclue.setup({
         triggers = {
           -- Leader triggers
@@ -44,7 +53,6 @@ return {
         },
 
         clues = {
-          -- Enhance this by adding descriptions for <Leader> mapping groups
           miniclue.gen_clues.builtin_completion(),
           miniclue.gen_clues.g(),
           miniclue.gen_clues.marks(),
@@ -53,15 +61,9 @@ return {
           miniclue.gen_clues.z(),
         },
 
-        -- Clue window settings
         window = {
           config = { width = 'auto' },
-          -- Delay before showing clue window
           delay = 200,
-
-          -- Keys to scroll inside the clue window
-          scroll_down = '<C-d>',
-          scroll_up = '<C-u>',
         },
       })
     end,
@@ -153,7 +155,7 @@ return {
   {
     "echasnovski/mini.pairs",
     event = "VeryLazy",
-    opts = {},
+    config = true,
     keys = {
       {
         "<leader>z",
@@ -168,6 +170,17 @@ return {
         desc = "Toggle auto pairs",
       },
     },
+  },
+
+  {
+    'echasnovski/mini.starter',
+    opts = {
+      evaluate_single = true,
+      header = header_art,
+      footer = '',
+      query_updaters = 'abcdefghijklmnopqrstuvwxyz0123456789_-.',
+      silent = true,
+    }
   },
 
   {
