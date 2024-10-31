@@ -17,45 +17,43 @@ return {
   },
 
   {
-    "L3MON4D3/LuaSnip",
-    build = (not jit.os:find("Windows"))
-        and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
-        or nil,
+    "garymjr/nvim-snippets",
     dependencies = {
       "rafamadriz/friendly-snippets",
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-      end,
     },
-    event = "InsertEnter",
     opts = {
-      history = true,
-      delete_check_events = "TextChanged",
+      friendly_snippets = true,
     },
-
     keys = {
       {
-        "<tab>",
+        "<Tab>",
         function()
-          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+          return vim.snippet.active({ direction = 1 }) and "<cmd>lua vim.snippet.jump(1)<cr>" or "<Tab>"
         end,
         expr = true,
         silent = true,
-        mode = "i",
+        mode = { "i", "s" },
       },
-      { "<tab>",   function() require("luasnip").jump(1) end,  mode = "s" },
-      { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+      {
+        "<S-Tab>",
+        function()
+          return vim.snippet.active({ direction = -1 }) and "<cmd>lua vim.snippet.jump(-1)<cr>" or "<S-Tab>"
+        end,
+        expr = true,
+        silent = true,
+        mode = { "i", "s" },
+      },
     },
   },
+
   -- Autocompletion
   {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
-      'L3MON4D3/LuaSnip',
+      "garymjr/nvim-snippets",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "saadparwaiz1/cmp_luasnip",
     },
     config = function()
       local lsp_zero = require('lsp-zero')
@@ -67,21 +65,27 @@ return {
       cmp.setup({
         sources = {
           { name = 'nvim_lsp' },
+          { name = "snippets" },
           { name = 'buffer' },
-          { name = 'luasnip' },
           { name = 'path' },
-          { name = "codeium" }
         },
-        formatting = lsp_zero.cmp_format(),
+
+        snippet = {
+          expand = function(args)
+            vim.snippet.expand(args.body)
+          end,
+        },
+
+        formatting = lsp_zero.cmp_format({}),
         mapping = cmp.mapping.preset.insert({
-          ['<Tab>'] = cmp_action.luasnip_supertab(),
-          ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
+          ['<Tab>'] = cmp_action.tab_complete(),
+          ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
           ['<CR>'] = cmp.mapping.confirm({ select = false }),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
-          ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-          ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+          -- ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+          -- ['<C-b>'] = cmp_action.luasnip_jump_backward(),
         })
       })
     end
@@ -127,17 +131,31 @@ return {
       local lsp_zero = require('lsp-zero')
       lsp_zero.extend_lspconfig()
 
-      lsp_zero.on_attach(function(client, bufnr)
+      lsp_zero.on_attach(function(_, bufnr)
         lsp_zero.default_keymaps({ buffer = bufnr, preserve_mappings = false })
         lsp_zero.buffer_autoformat()
       end)
-
       lsp_zero.set_sign_icons({
         error = '✘',
         warn = '▲',
         hint = '⚑',
         info = '»'
       })
+      local opts = {
+        diagnostics = {
+          update_in_insert = false,
+          virtual_text = {
+            spacing = 4,
+            source = "if_many",
+            prefix = "●",
+          },
+        },
+        inlay_hints = {
+          enabled = true,
+        },
+      }
+
+      vim.diagnostic.config(opts)
 
       require('mason-lspconfig').setup({
         handlers = {
@@ -151,3 +169,4 @@ return {
     end
   }
 }
+
